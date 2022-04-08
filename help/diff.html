@@ -1,0 +1,143 @@
+<html>
+
+<head>
+<title>Comparing Files</title>
+<link rel="StyleSheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<div id="nav">
+
+
+
+	<ul>
+	
+		<li >
+		
+			<a href="index.html">Welcome</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="comments.html">Setting Comments</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="types.html">Setting Data Types</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<b>Comparing Files</b>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bitmap.html">Bitmap Visualisation</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="virt-mapping.html">Virtual Address Mapping</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="plugins.html">Writing Plugins</a>
+		
+		
+		</li>
+	
+		<li class="book">
+		
+			<a href="bt.html">Binary Templates</a>
+		
+		
+	<ul>
+	
+		<li >
+		
+			<a href="bt-syntax.html">General Syntax</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bt-types.html">Types</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bt-funcs.html">Functions</a>
+		
+		
+		</li>
+	
+	</ul>
+
+		</li>
+	
+	</ul>
+
+</div>
+
+<div id="content">
+
+
+<h2>Comparing Files</h2>
+
+<p>
+The <i>Compare data</i> function allows you to two or more files, or sections of files to see where they differ, as shown by the screenshot comparing the start of two ELF executables below:
+</p>
+
+<p>
+<img src="diff-elf.png">
+</p>
+
+<p>
+The bytes highlighted in red differ between the files, the rest are identical.
+</p>
+
+<p>
+The buttons in the toolbar allow showing/hiding the offset/text columns, selecting whether long sections of identical bytes will be hidden (as shown in the screenshot) and jumping between differences.
+</p>
+
+<p>
+To open the compare view, select <i>Compare whole file...</i> from the <i>Edit</i> menu (or press <i>Ctrl+K</i>) in the main window, or select a range of bytes to compare and use <i>Compare selection...</i> from the context menu (or press <i>Ctrl+Shift+K</i>). Do this multiple times to add more files/ranges to the comparison.
+</p>
+
+<p>
+Unlike the UNIX <code>diff</code> utility, this tool only operates on fixed-length binary files - the common points of variable-length binary formats will not be detected.
+</p>
+
+
+</div>
+
+<div id="footer">
+<table>
+<tr>
+<td>Reverse Engineers' Hex Editor</td>
+<td>Copyright &copy; Daniel Collins (2017-2022)</td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>
+

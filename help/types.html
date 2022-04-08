@@ -1,0 +1,142 @@
+<html>
+
+<head>
+<title>Setting Data Types</title>
+<link rel="StyleSheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<div id="nav">
+
+
+
+	<ul>
+	
+		<li >
+		
+			<a href="index.html">Welcome</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="comments.html">Setting Comments</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<b>Setting Data Types</b>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="diff.html">Comparing Files</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bitmap.html">Bitmap Visualisation</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="virt-mapping.html">Virtual Address Mapping</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="plugins.html">Writing Plugins</a>
+		
+		
+		</li>
+	
+		<li class="book">
+		
+			<a href="bt.html">Binary Templates</a>
+		
+		
+	<ul>
+	
+		<li >
+		
+			<a href="bt-syntax.html">General Syntax</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bt-types.html">Types</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bt-funcs.html">Functions</a>
+		
+		
+		</li>
+	
+	</ul>
+
+		</li>
+	
+	</ul>
+
+</div>
+
+<div id="content">
+
+
+<h2>Setting Data Types</h2>
+
+<p>
+By default all data in a file is merely "data" - the hex values of the bytes and their ASCII character representations will be shown. You can set more specific data types by selecting a range of bytes and choosing types from the <i>Set data type</i> menu under the context (right click) menu.
+</p>
+
+<p>
+Types are grouped into the following categories:
+
+<ul>
+<li><b>Machine code</b><br>
+Disassembles the code for the chosen architecture (ARM, MIPS, x86, etc) and displays the disassembly in the main view along with the hex and ASCII character representations.</li>
+
+<li><b>Number</b><br>
+Displays the numeric value of the chosen type.</li>
+
+<li><b>Text</b><br>
+Displays the hex values like normal, but text will be decoded from the chosen encoding (UTF-8, UTF-16, ISO-8859-1, etc).</li>
+</ul>
+</p>
+
+<p>
+Type annotations are saved alongside the original file in a <i>.rehex-meta</i> file along with other metadata.
+</p>
+
+
+</div>
+
+<div id="footer">
+<table>
+<tr>
+<td>Reverse Engineers' Hex Editor</td>
+<td>Copyright &copy; Daniel Collins (2017-2022)</td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>
+

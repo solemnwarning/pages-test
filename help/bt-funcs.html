@@ -1,0 +1,303 @@
+<html>
+
+<head>
+<title>Function Reference</title>
+<link rel="StyleSheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<div id="nav">
+
+
+
+	<ul>
+	
+		<li >
+		
+			<a href="index.html">Welcome</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="comments.html">Setting Comments</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="types.html">Setting Data Types</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="diff.html">Comparing Files</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bitmap.html">Bitmap Visualisation</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="virt-mapping.html">Virtual Address Mapping</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="plugins.html">Writing Plugins</a>
+		
+		
+		</li>
+	
+		<li class="book">
+		
+			<a href="bt.html">Binary Templates</a>
+		
+		
+	<ul>
+	
+		<li >
+		
+			<a href="bt-syntax.html">General Syntax</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bt-types.html">Types</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<b>Functions</b>
+		
+		
+		</li>
+	
+	</ul>
+
+		</li>
+	
+	</ul>
+
+</div>
+
+<div id="content">
+
+
+<h2>Function Reference</h2>
+
+<p>
+This page lists all the built-in functions available for templates.
+</p>
+
+<ul>
+<li><a href="#iofunc">I/O Functions</a></li>
+<li><a href="#arrayfunc">Array Functions</a></li>
+</ul>
+
+<a name="iofunc"><h3>I/O Functions</h3></a>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">void</font> BigEndian()
+<font color="#800000">void</font> LittleEndian()
+</pre>
+</blockquote>
+
+
+<p>
+Select big-endian or little-endian mode. You can switch back and forth within the same template to declare fields with different byte orders.
+</p>
+
+<p>
+Little-endian mode is selected by default.
+</p>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">bool</font> IsBigEndian()
+<font color="#800000">bool</font> IsLittleEndian()
+</pre>
+</blockquote>
+
+
+<p>
+Check whether big-endian or little-endian mode is selected.
+</p>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">bool</font> FEof()
+</pre>
+</blockquote>
+
+
+<p>
+Returns true if the read position is at the end of the file.
+</p>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">int64_t</font> FileSize()
+</pre>
+</blockquote>
+
+
+<p>
+Returns the length of the file in bytes.
+</p>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">void</font> FSeek(<font color="#800000">int64_t</font> offset)
+</pre>
+</blockquote>
+
+
+<p>
+Moves the read position relative to the start of the file.
+</p>
+
+<p>
+The read position is used for reading data and defining new variables.
+</p>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">void</font> FSkip(<font color="#800000">int64_t</font> offset)
+</pre>
+</blockquote>
+
+
+<p>
+Moves the read position relative to its current offset.
+</p>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">int64_t</font> FTell()
+</pre>
+</blockquote>
+
+
+<p>
+Returns the current read position in the file.
+</p>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">int8_t</font> ReadI8(<font color="#800000">int64_t</font> offset = FTell())
+<font color="#800000">uint8_t</font> ReadU8(<font color="#800000">int64_t</font> offset = FTell())
+<font color="#800000">int16_t</font> ReadI16(<font color="#800000">int64_t</font> offset = FTell())
+<font color="#800000">uint16_t</font> ReadU16(<font color="#800000">int64_t</font> offset = FTell())
+<font color="#800000">int32_t</font> ReadI32(<font color="#800000">int64_t</font> offset = FTell())
+<font color="#800000">uint32_t</font> ReadU32(<font color="#800000">int64_t</font> offset = FTell())
+<font color="#800000">int64_t</font> ReadI64(<font color="#800000">int64_t</font> offset = FTell())
+<font color="#800000">uint64_t</font> ReadU64(<font color="#800000">int64_t</font> offset = FTell())
+<font color="#800000">float</font> ReadFloat(<font color="#800000">float</font> offset = FTell())
+<font color="#800000">double</font> ReadDouble(<font color="#800000">double</font> offset = FTell())
+</pre>
+</blockquote>
+
+
+<p>
+The <code>ReadXXX()</code> functions read a value from the document and return it. The <code>offset</code> parameter is optional and defaults to the current read position.
+</p>
+
+<p>
+Calling any of these functions with an invalid offset will result in a template error.
+</p>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">void</font> Printf(string format, ...)
+</pre>
+</blockquote>
+
+
+<p>
+Writes a message to the application console. The message will also be shown in the output window if the template encounters an error.
+</p>
+
+<a name="arrayfunc"><h3>Array Functions</h3></a>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">int64_t</font> ArrayLength(<font color="#800000">any array type</font> array)
+</pre>
+</blockquote>
+
+
+<p>
+Returns the number of elements in the given array.
+</p>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">void</font> ArrayResize(<font color="#800000">any_array_type</font> array, <font color="#800000">int64_t</font> num_elements)
+</pre>
+</blockquote>
+
+
+<p>
+The <code>ArrayResize()</code> function changes the size of the given array. Any new elements will be initialised to their default values and any removed elements will be erased.
+</p>
+
+<p>
+This function can be called to incrementally increase the size of an array being read from the document, but <b>not</b> if any variables have been defined after the array.
+</p>
+
+<hr>
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">void</font> ArrayExtend(<font color="#800000">any_array_type</font> array, <font color="#800000">int64_t</font> num_elements = 1)
+</pre>
+</blockquote>
+
+
+<p>
+Equivalent to <code>ArrayResize(array, ArrayLength(array) + num_elements)</code>.
+</p>
+
+
+</div>
+
+<div id="footer">
+<table>
+<tr>
+<td>Reverse Engineers' Hex Editor</td>
+<td>Copyright &copy; Daniel Collins (2017-2022)</td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>
+

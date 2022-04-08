@@ -1,0 +1,364 @@
+<html>
+
+<head>
+<title>Types</title>
+<link rel="StyleSheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<div id="nav">
+
+
+
+	<ul>
+	
+		<li >
+		
+			<a href="index.html">Welcome</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="comments.html">Setting Comments</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="types.html">Setting Data Types</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="diff.html">Comparing Files</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bitmap.html">Bitmap Visualisation</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="virt-mapping.html">Virtual Address Mapping</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="plugins.html">Writing Plugins</a>
+		
+		
+		</li>
+	
+		<li class="book">
+		
+			<a href="bt.html">Binary Templates</a>
+		
+		
+	<ul>
+	
+		<li >
+		
+			<a href="bt-syntax.html">General Syntax</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<b>Types</b>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bt-funcs.html">Functions</a>
+		
+		
+		</li>
+	
+	</ul>
+
+		</li>
+	
+	</ul>
+
+</div>
+
+<div id="content">
+
+
+<h2>Types</h2>
+
+<ul>
+<li><a href="#basic">Basic Types</a></li>
+<li><a href="#array">Arrays</a></li>
+<li><a href="#string">Strings</a></li>
+<li><a href="#struct">Structures</a></li>
+<li><a href="#enum">Enumerations</a></li>
+<li><a href="#typedef">Typedefs</a></li>
+<li><a href="#reference">References</a></li>
+</ul>
+
+<a name="basic"><h3>Basic Types</h3></a>
+
+<p>
+The types used in templates are based on C types. The following types are implemented and may be used to declare both data in a file as well as local variables.
+</p>
+
+<ul>
+<li><font color="#800000" face="monospace">char</font> / <font color="#800000" face="monospace">int8_t</font> - Signed 8-bit integer</li>
+<li><font color="#800000" face="monospace">uint8_t</font> - Unsigned 8-bit integer</li>
+<li><font color="#800000" face="monospace">int16_t</font> - Signed 16-bit integer</li>
+<li><font color="#800000" face="monospace">uint16_t</font> - Unsigned 16-bit integer</li>
+<li><font color="#800000" face="monospace">int</font> / <font color="#800000" face="monospace">int32_t</font> - Signed 32-bit integer</li>
+<li><font color="#800000" face="monospace">uint32_t</font> - Unsigned 32-bit integer</li>
+<li><font color="#800000" face="monospace">int64_t</font> - Signed 64-bit integer</li>
+<li><font color="#800000" face="monospace">uint64_t</font> - Unsigned 64-bit integer</li>
+<li><font color="#800000" face="monospace">float</font> - 32-bit floating-point number</li>
+<li><font color="#800000" face="monospace">double</font> - 64-bit floating-point number</li>
+</ul>
+
+<p>
+The signed and unsigned keywords from C are present and can be used with any integer type to make a signed/unsigned version.
+</p>
+
+<a name="array"><h3>Arrays</h3></a>
+
+<p>
+Arrays are also present from C and can be used to declare file data or local variables.
+</p>
+
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">uint32_t</font> data_length;
+<font color="#800000">uint8_t</font> data[data_length];
+
+<b>local</b> <font color="#800000">uint8_t</font> data_copy[data_length] = data;
+</pre>
+</blockquote>
+
+
+<p>
+Unlike C arrays, arrays in templates have a known size and can be resized at runtime. Local arrays can be grown or shrunk arbitrarily while file arrays can only be grown, and not once further file variables have been defined after the array. See <a href="bt-funcs.html#arrayfunc">Array Functions</a> for more information.
+</p>
+
+<p>
+Multidimensional arrays are not currently supported.
+</p>
+
+<a name="string"><h3>Strings</h3></a>
+
+<p>
+Strings may be represented as <font color="#800000" face="monospace">char</font> arrays like in C, or using the built-in variable-length <font color="#800000" face="monospace">string</font> type.
+</p>
+
+<p>
+The <font color="#800000" face="monospace">string</font> type can only be used for local variables as it has no format in a file, while <font color="#800000" face="monospace">char[]</font> can be used in both contexts.
+</p>
+
+<p>
+Implicit conversions between <font color="#800000" face="monospace">string</font> and <font color="#800000" face="monospace">char[]</font> are allowed, as shown by the examples below:
+</p>
+
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+/* Creates 's' containing "Hello world" and 't' containing "Hello world"
+ * with nul bytes to pad the remaining space.
+*/
+
+<font color="#800000">string</font> s = "Hello world";
+<font color="#800000">char</font> t[32] = s;
+
+/* Passing a string to a function that takes a char[] */
+
+<font color="#800000">void</font> func1(<font color="#800000">char[]</font> p)
+{
+	/* p is a char[] array, containing "Hello world" with no padding. */
+}
+
+func1(s);
+
+/* Passing a char[] to a function that takes a string. */
+
+<font color="#800000">void</font> func2(<font color="#800000">string</font> p)
+{
+	/* p is a string containing "Hello world" with no padding. */
+}
+
+func2(t);
+</pre>
+</blockquote>
+
+
+<a name="struct"><h3>Structures</h3></a>
+
+<p>
+Structures like their C counterparts exist too. You can use a structure to logically group or reuse things such as headers.
+</p>
+
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<b>struct</b> posix_tar_header
+{                               /* byte offset */
+	<font color="#800000">char</font> name[100];         /*   0 */
+	<font color="#800000">char</font> mode[8];           /* 100 */
+	<font color="#800000">char</font> uid[8];            /* 108 */
+	<font color="#800000">char</font> gid[8];            /* 116 */
+	<font color="#800000">char</font> size[12];          /* 124 */
+	
+	/* And so on... I think you get the idea. */
+};
+
+<b>struct</b> posix_tar_header header;
+</pre>
+</blockquote>
+
+
+<p>
+<img src="template-example-struct1.png">
+</p>
+
+<hr>
+
+<p>
+Unlike C structures, structures in a template can contain arbitrary code, for example to conditionally declare certain members based on preceding members and can even take arguments like a function.
+</p>
+
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<b>struct</b> complex_thing(<font color="#800000">string</font> debug_msg)
+{
+	<font color="#800000">unsigned int</font> flags;
+	
+	<b>if</b>(flags &amp; 1) {
+		<font color="#800000">int</font> member1; /* Only declared if "flags" member has the 1 bit set. */
+	}
+	
+	<font color="#800000">int</font> member2;
+	
+	Printf("debug_msg = %s, flags = %d\n", debug_msg, flags);
+};
+
+<b>struct</b> complex_thing ct1("foo");
+<b>struct</b> complex_thing ct2("bar");
+</pre>
+</blockquote>
+
+
+<p>
+<img src="template-example-struct2.png" border="0">
+</p>
+
+<a name="enum"><h3>Enumerations</h2></a>
+
+<p>
+Enumerations like C/C++ are present, but with some differences:
+</p>
+
+<ul>
+<li>The variable type is just an alias to an explicit storage type ("int" by default)</li>
+<li>There is no type safety - mix and match any enums and other numbers with no casting</li>
+</ul>
+
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+/* Declaring and using a plain enum. */
+
+<b>enum</b> simple_enum_type
+{
+	ENUM_ONE,
+	ENUM_TWO,
+	ENUM_THREE,
+};
+
+<b>enum</b> simple_enum_type v; /* Underlying type is "int" */
+
+/* Declaring an anonymous enum variable. */
+
+<b>enum</b>
+{
+	ANON_ONE,
+	ANON_FOUR = 4,
+	ANON_FIVE,
+} anonymous_enum_var;
+
+/* Declaring an enum with a specific type. */
+
+enum &lt;<font color="#800000">uint8_t</font>&gt; one_byte_enum
+{
+	SPEC_ONE,
+	SPEC_TWO,
+	SPEC_THREE,
+};
+
+<b>enum</b> one_byte_enum o; /* Underlying type is "uint8_t" */
+</pre>
+</blockquote>
+
+
+<a name="typedef"><h3>Typedefs</h3></a>
+
+<p>
+Typedefs exist and let you alias types just like in C, not a whole lot else to say really.
+</p>
+
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<b>typedef</b> <font color="#800000">uint16_t</font> WORD;
+<b>typedef</b> <font color="#800000">unsigned int</font> DWORD;
+</pre>
+</blockquote>
+
+
+<a name="reference"><h3>References</h3></a>
+
+<p>
+References (like in C++) are available and mainly exist for passing values by reference into structs/functions to allow modifications by the function to be visible by the caller.
+</p>
+
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<b>local</b> <font color="#800000">int</font> x = 1;
+
+void set_int_in_a_convoluted_manner(<font color="#800000">int</font> &i, <font color="#800000">int</font> new_value)
+{
+	i = new_value;
+}
+
+set_int_in_a_convoluted_manner(x, 2); /* x is now 2 */
+</pre>
+</blockquote>
+
+
+<p>
+Raw pointers like in C are not supported.
+</p>
+
+
+</div>
+
+<div id="footer">
+<table>
+<tr>
+<td>Reverse Engineers' Hex Editor</td>
+<td>Copyright &copy; Daniel Collins (2017-2022)</td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>
+

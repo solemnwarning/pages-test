@@ -1,0 +1,180 @@
+<html>
+
+<head>
+<title>General Syntax</title>
+<link rel="StyleSheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<div id="nav">
+
+
+
+	<ul>
+	
+		<li >
+		
+			<a href="index.html">Welcome</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="comments.html">Setting Comments</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="types.html">Setting Data Types</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="diff.html">Comparing Files</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bitmap.html">Bitmap Visualisation</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="virt-mapping.html">Virtual Address Mapping</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="plugins.html">Writing Plugins</a>
+		
+		
+		</li>
+	
+		<li class="book">
+		
+			<a href="bt.html">Binary Templates</a>
+		
+		
+	<ul>
+	
+		<li >
+		
+			<b>General Syntax</b>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bt-types.html">Types</a>
+		
+		
+		</li>
+	
+		<li >
+		
+			<a href="bt-funcs.html">Functions</a>
+		
+		
+		</li>
+	
+	</ul>
+
+		</li>
+	
+	</ul>
+
+</div>
+
+<div id="content">
+
+
+<H2>General Syntax</H2>
+
+<P>
+A template is a script with a C-like syntax which can read and process data from the open file and annotate it by setting data types, adding comments, etc. Unlike a C program, templates do not have an entry point (i.e. a <code>main</code> function) - they are executed from top to bottom like a shell script.
+</P>
+
+<P>
+The most simple template is one that just defines some variables, which will set comments and data types in the file, for example:
+</P>
+
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">int</font> magic;
+<font color="#800000">int</font> values[4];
+</pre>
+</blockquote>
+
+
+<P>
+Would produce a file like the following:<BR>
+<BR>
+<IMG SRC="template-example-var1.png" BORDER="0">
+</P>
+
+<HR>
+
+<P>
+The variables you define can also be read in the template, for example to determine the length of an array from data in the file:
+</P>
+
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<font color="#800000">int</font> magic;
+<font color="#800000">short</font> size;
+<font color="#800000">int</font> values[size];
+</pre>
+</blockquote>
+
+
+<P>
+<IMG SRC="template-example-var2.png" BORDER="0">
+</P>
+
+<P>
+That example is like the first, except the number of elements in the "values" array comes from another variable read from the file rather than being hardcoded.
+</P>
+
+<H2>Local variables</H2>
+
+<P>
+Local variables are variables that are scoped to the block they are defined in. Unlike normal variables, declaring a local variable will not annotate the file or advance the file position.
+<BR>
+<BR>
+Local variables are used for temporary storage within scripts - for example loop counters, values read from the file using the File Read APIs, etc.
+</P>
+
+<blockquote style="background-color:#D9D7F1;">
+<pre>
+<b>local</b> <font color="#800000">int</font> x = 0;
+</pre>
+</blockquote>
+
+
+
+</div>
+
+<div id="footer">
+<table>
+<tr>
+<td>Reverse Engineers' Hex Editor</td>
+<td>Copyright &copy; Daniel Collins (2017-2022)</td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>
+
